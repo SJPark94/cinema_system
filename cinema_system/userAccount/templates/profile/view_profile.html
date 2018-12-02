@@ -34,7 +34,6 @@
                     {% block content %}
                     {% if user.is_authenticated %}
                     {% csrf_token %}
-                    <!--<li style="margin-top: 15px; padding-right: 10px; float: right;"><a href="{% url 'logout' %}">Log Out</a></li>-->
                     <li style="margin-top: 15px; padding-right: 15px; float: right;">
                         <div class="dropdown">
                             <button class="dropbtn"><a>{{ user.first_name }} {{ user.last_name }}</a> &darr;</button>
@@ -44,10 +43,6 @@
                             </div>
                         </div>
                     </li>
-                    {% else %}
-                    {% csrf_token %}
-                    <li style="margin-top: 15px; padding-right: 10px; float: right"><a href="{% url 'login' %}">Login</a></li>
-
                     {% endif %}
                     {% endblock %}
                 </ul>
@@ -58,7 +53,15 @@
                     </div>
                 {% else %}
                     <div class="smallcontainer">
-                        <p>This page will be filled with movies!</p>
+                            <p>Email: {{ user.email }}</p>
+                            <p>First Name: {{ user.first_name }}</p>
+                            <p>Last Name: {{ user.last_name }}</p>
+                            <p>Street Address: {{ user.street_address }}</p>
+                            <p>City: {{ user.city }}</p>
+                            <p>State: {{ user.state }}</p>
+                            <p>Zip Code: {{ user.zipcode }}</p>
+                            <p>Send Promo: {{ user.sendPromo }}</p>
+
                     </div>
                  {% endif %}
 

@@ -1,11 +1,8 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import UserInfo
 
-STATES = (('AL', 'AL'), ('AK', 'AK'), ('AZ', 'AZ'), ('AR', 'AR'))
-
-class codeForm(forms.ModelForm):
-    code = forms.CharField(required=True, label='Activation Code')
+STATES = (('', '----'), ('AL', 'AL'), ('AK', 'AK'), ('AZ', 'AZ'), ('AR', 'AR'))
 
 class UserLogin(forms.ModelForm):
 
@@ -24,7 +21,7 @@ class UserRegister(UserCreationForm):
     first_name = forms.CharField(label='First Name', required=True)
     last_name = forms.CharField(label='Last Name', required=True)
 
-    street_address = forms.CharField(label='Street Address', required=False)
+    street_address = forms.CharField(label='Street TEST Address', required=False)
     city = forms.CharField(label='City', required=False)
     state = forms.ChoiceField(choices=STATES, label='State', widget=forms.Select(), required=False)
     zipcode = forms.CharField(label = 'Zip Code', required=False)

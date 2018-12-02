@@ -8,11 +8,13 @@
 </head>
 <body>
 <div class="container">
-{% csrf_token %}
 <h1>An email was sent to {{ user.email.value }} containing an activation code!</h1>
 <p>Please check your inbox for your activation code and copy it here.</p>
+<form method='POST'>
 {% csrf_token %}
-<a href="{% url 'login' %}">click here to login</a>
+<input name='code'><br>
+<button type="submit" id="loginbtn">Login</button><br>
+</form>
 </div>
 </body>
 </html>

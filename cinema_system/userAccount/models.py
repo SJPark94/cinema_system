@@ -5,7 +5,7 @@ from django.utils import timezone
 # Create your models here.
 
 
-STATES = (('---', '---'), ('AL', 'AL'), ('AK', 'AK'), ('AZ', 'AZ'), ('AR', 'AR'))
+STATES = (('', '---'), ('AL', 'AL'), ('AK', 'AK'), ('AZ', 'AZ'), ('AR', 'AR'))
 
 class CustomUserManager(BaseUserManager):
 
@@ -15,7 +15,7 @@ class CustomUserManager(BaseUserManager):
             raise ValueError('email must be set')
         email = self.normalize_email(email)
         user = UserInfo(email = email, is_staff=is_staff,
-                        is_superuser=is_superuser, date_joined=now,
+                        is_superuser=is_superuser, date_joined=now, is_active=False
                         **extra_fields)
         user.set_password(password)
         user.save()
@@ -40,7 +40,6 @@ class UserInfo(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
-    is_active = False
     email_confirmed = models.BooleanField(default=False)
     activation_code = models.CharField(max_length=50, blank=True, default='')
     street_address = models.CharField(max_length=100, blank=True, default='')

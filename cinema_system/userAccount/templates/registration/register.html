@@ -18,11 +18,11 @@
     <div id="registerdiv">
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <p>First Name: {{register.first_name}}*</p>
-        <p>Last Name: {{register.last_name}}*</p>
-        <p>Email: {{register.email}}*</p>
-        <p>Enter a password: {{register.password1}}*</p>
-        <p>Confirm your password: {{register.password2}}*</p>
+        <p>First Name: {{register.first_name}}</p>
+        <p>Last Name: {{register.last_name}}</p>
+        <p>Email: {{register.email}}</p>
+        <p>Enter password: {{register.password1}}</p>
+        <p>Confirm password: {{register.password2}}</p>
         <p>Street Address: {{register.street_address}}</p>
         <p>City: {{register.city}}</p>
         <p> Select State: {{register.state}}</p>
