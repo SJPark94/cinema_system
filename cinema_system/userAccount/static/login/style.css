@@ -73,7 +73,7 @@ li a:hover:not(.active) {
 
 .searchBox form > .textbox:focus {
     outline: 0;
-    background-color: #FFF;
+    background-color: #FFE;
 }
 
 .searchBox form > .button {
@@ -174,7 +174,7 @@ li a:hover:not(.active) {
     margin: auto;
     text-align: center;
     color: white;
-    width: 50%;
+    width:75%;
     padding: 10px;
     border-radius: 4px 4px 4px 4px;
     border: 3px solid #60b0f4;
@@ -234,3 +234,20 @@ input[name] {
     max-width: 100%;
 }
 
+.errorlist ul {
+    margin-left: 50%;
+}
+
+input[name=code] {
+    margin-right: 25%;
+    text-align: center  ;
+}
+
+#poster {
+    width: 15%;
+    height: auto;
+}
+
+.movieListing {
+    margin-top: 10%;
+}

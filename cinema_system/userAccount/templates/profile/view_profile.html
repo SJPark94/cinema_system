@@ -36,7 +36,7 @@
                     {% csrf_token %}
                     <li style="margin-top: 15px; padding-right: 15px; float: right;">
                         <div class="dropdown">
-                            <button class="dropbtn"><a>{{ user.first_name }} {{ user.last_name }}</a> &darr;</button>
+                            <button class="dropbtn"><a>{{ user.first_name }} {{ user.last_name }}</a></button>
                             <div class="dropdown-content">
                                 <a href="http://127.0.0.1:8000/accounts/viewProfile">Profile</a>
                                 <a href="{% url 'logout' %}">Log Out</a>
@@ -61,6 +61,8 @@
                             <p>State: {{ user.state }}</p>
                             <p>Zip Code: {{ user.zipcode }}</p>
                             <p>Send Promo: {{ user.sendPromo }}</p>
+                            <form action="http://127.0.0.1:8000/accounts/editProfile/"><input id="loginbtn" type="submit" value="Edit Profile"></form>
+
 
                     </div>
                  {% endif %}

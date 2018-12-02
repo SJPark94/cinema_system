@@ -50,3 +50,10 @@ class UserRegister(UserCreationForm):
         if password1 != password2:
             raise forms.ValidationError('Passwords do not match.')
         return password2
+
+class EditProfileForm(UserChangeForm):
+    class Meta:
+        password = None
+        model = UserInfo
+        fields = ['first_name', 'last_name', 'email', 'street_address',
+                  'city', 'state', 'zipcode', 'sendPromo']

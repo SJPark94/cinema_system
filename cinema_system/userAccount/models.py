@@ -48,16 +48,3 @@ class UserInfo(AbstractUser):
     zipcode = models.CharField(max_length=50, blank=True, default='')
     sendPromo = models.BooleanField(default=False)
     accountType = models.CharField(max_length=50, default='Web User')
-
-class PaymentInfo(models.Model):
-    userAccount = models.OneToOneField(UserInfo,
-    on_delete=models.CASCADE,
-    primary_key=True)
-
-    cardNumber = models.CharField(max_length=50, blank=True, default='')
-    cardMonth = models.CharField(max_length=50, blank=True, default='')
-    cardYear = models.CharField(max_length=50, blank=True, default='')
-    cardPin = models.CharField(max_length=50, blank=True, default='')
-    cardFirstName = models.CharField(max_length=50, blank=True, default='')
-    cardLastName = models.CharField(max_length=50, blank=True, default='')
-

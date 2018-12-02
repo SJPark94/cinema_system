@@ -1,13 +1,20 @@
 from django.shortcuts import render, redirect
-from .forms import UserRegister
+from .forms import UserRegister, EditProfileForm
+from django.contrib.auth.forms import PasswordChangeForm
 from django.core.mail import send_mail
+from django.contrib.auth import update_session_auth_hash
 import string, random
 from .models import UserInfo
+from movies.models import MovieInfo
 # Create your views here.
 
 
 def homepage(request):
-    return render(request, 'homepage/index.html')
+    movieObject = MovieInfo.objects.all()
+    for e in MovieInfo.objects.all():
+        print(e.title)
+    print('there is some movieObject')
+    return render(request, 'homepage/index.html', {'movies': movieObject})
 
 def registerRequest(request):
     if request.method == 'POST':
@@ -60,3 +67,27 @@ def activateAccount(request):
 def viewProfile(request):
     user = request.user
     return render(request, 'profile/view_profile.html', {'user': user})
+
+def editProfile(request):
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=request.user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/accounts/viewProfile/')
+    else:
+        form = EditProfileForm(instance=request.user)
+        return render(request, 'profile/edit_profile.html', {'form': form})
+
+
+def changePassword(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect('/accounts/viewProfile/')
+    else:
+        form = PasswordChangeForm(user=request.user)
+        return render(request, 'profile/change_password.html', {'form': form})
