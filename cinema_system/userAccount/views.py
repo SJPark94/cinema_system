@@ -3,8 +3,6 @@ from .forms import UserRegister
 from django.core.mail import send_mail
 import string, random
 from .models import UserInfo
-# Create your views here.
-
 
 def homepage(request):
     return render(request, 'homepage/index.html')
