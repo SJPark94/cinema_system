@@ -2,21 +2,18 @@ from django.db import models
 from uuid import uuid4
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils import timezone
-# Create your models here.
-
 
 STATES = (('', '---'), ('AL', 'AL'), ('AK', 'AK'), ('AZ', 'AZ'), ('AR', 'AR'))
 
 class CustomUserManager(BaseUserManager):
-
     def _create_user(self, email, password, is_staff, is_superuser, **extra_fields):
         now = timezone.now()
         if not email:
             raise ValueError('email must be set')
         email = self.normalize_email(email)
         user = UserInfo(email = email, is_staff=is_staff,
-                        is_superuser=is_superuser, date_joined=now, is_active=False
-                        **extra_fields)
+                        is_superuser=is_superuser, date_joined=now, 
+                        is_active=False,**extra_fields)
         user.set_password(password)
         user.save()
         return user
@@ -31,7 +28,6 @@ def generateUUID():
     return str(uuid4())
 
 class UserInfo(AbstractUser):
-
     username = None
     email = models.EmailField(unique=True)
 

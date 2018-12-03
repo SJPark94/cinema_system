@@ -5,7 +5,6 @@ from .models import UserInfo
 STATES = (('', '----'), ('AL', 'AL'), ('AK', 'AK'), ('AZ', 'AZ'), ('AR', 'AR'))
 
 class UserLogin(forms.ModelForm):
-
     email = forms.EmailField(required=True)
     password = forms.CharField(widget=forms.PasswordInput())
 

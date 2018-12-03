@@ -6,8 +6,6 @@ from django.contrib.auth import update_session_auth_hash
 import string, random
 from .models import UserInfo
 from movies.models import MovieInfo
-# Create your views here.
-
 
 def homepage(request):
     movieObject = MovieInfo.objects.all()
@@ -79,7 +77,6 @@ def editProfile(request):
         form = EditProfileForm(instance=request.user)
         return render(request, 'profile/edit_profile.html', {'form': form})
 
-
 def changePassword(request):
     if request.method == 'POST':
         form = PasswordChangeForm(data=request.POST, user=request.user)
@@ -91,3 +88,10 @@ def changePassword(request):
     else:
         form = PasswordChangeForm(user=request.user)
         return render(request, 'profile/change_password.html', {'form': form})
+
+def get_queryset(self):
+        query = self.request.GET.get('q')
+        if query:
+            return Movie.objects.filter(title__icontains=query)
+        else:
+            return Movie.objects.all()
