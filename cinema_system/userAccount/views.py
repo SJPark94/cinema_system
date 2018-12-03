@@ -5,7 +5,11 @@ import string, random
 from .models import UserInfo
 
 def homepage(request):
-    return render(request, 'homepage/index.html')
+    movieObject = MovieInfo.objects.all()
+    for e in MovieInfo.objects.all():
+        print(e.title)
+    print('there is some movieObject')
+    return render(request, 'homepage/index.html', {'movies': movieObject})
 
 def registerRequest(request):
     if request.method == 'POST':
@@ -45,8 +49,7 @@ def activateAccount(request):
         email = request.session['email']
         user = UserInfo.objects.get(email=email)
         code = request.POST.get('code')
-        if(user.activation_code == code):
-
+        if(user.activation_code == code):   
             user.email_confirmed = True
             user.active = True;
             user.save()
