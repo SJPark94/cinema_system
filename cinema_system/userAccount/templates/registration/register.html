@@ -14,7 +14,7 @@
                      </ul>
             </div>
 <div class="smallcontainer">
-    <p>Register for an Account!</p> <br>
+    <p><h3>Register for an Account!</h3></p> <br>
     <div id="registerdiv">
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
@@ -32,6 +32,7 @@
         <p id="errors" style="margin-left: 40px">{{ register.errors }}</p>
 
         <br><br>
+
         <button type="submit" id="loginbtn">Join Now</button><br>
     </form>
 </div>

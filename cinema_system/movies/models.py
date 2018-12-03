@@ -10,3 +10,4 @@ class MovieInfo(models.Model):
     poster = models.CharField(max_length=50, blank=True, default='')
     rating = models.CharField(max_length=10, blank=True, default='')
     modelType = models.CharField(max_length=20, blank=True, default='')
+

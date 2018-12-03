@@ -18,16 +18,11 @@ class PaymentInfo(models.Model):
 
 class PromoCode(models.Model):
 
-    promotionCode = models.CharField(max_length=50, blank=True, default='')
+    promotionCode = models.CharField(max_length=50, blank=True, default='', primary_key=True)
     discountPercentage = models.CharField(max_length=25, blank=True, default='00')
 
 class Tickets(models.Model):
 
-    ticketType = models.CharField(max_length=50, blank=True, default='')
+    ticketType = models.CharField(max_length=50, blank=True, default='', primary_key=True)
     ticketPrice = models.CharField(max_length=20, blank=True, default='00')
 
-class Cart(models.Model):
-
-    userAccount = models.OneToOneField(UserInfo,
-                                       on_delete=models.CASCADE,
-                                       primary_key=True)

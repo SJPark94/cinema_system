@@ -197,6 +197,7 @@ li a:hover:not(.active) {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 4px 4px 4px 4px;
+    margin-left: 5%;
 }
 
 #loginbtn:hover {
@@ -206,7 +207,6 @@ li a:hover:not(.active) {
     background-color: #60c0f4;
 }
 .footer {
-    position: absolute;
     right: 0;
     bottom: 0;
     left: 0;
@@ -235,8 +235,8 @@ input[name] {
     max-width: 100%;
 }
 
-.errorlist ul {
-    margin-left: 50%;
+.errorlist {
+    margin-left: 25%;
 }
 
 input[name=code] {
@@ -251,4 +251,12 @@ input[name=code] {
 
 .movieListing {
     margin-top: 10%;
+}
+
+#registerdiv {
+    margin-right: 10%;
+}
+
+#password_container {
+    margin-right: 10%;
 }

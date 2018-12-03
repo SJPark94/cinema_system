@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'movie_css/movie_page.css' %}">
 
     <meta charset='UTF-8'>
-    <title>Moovies :D</title>
+    <title>Search Results :D</title>
 </head>
     <body>
         <div class="container">
@@ -66,11 +66,11 @@
             </div>
 
                     <div class="smallcontainer">
-                    <div class="nowplayingbar"><hr><h3>Movies to see!</h3><hr></div>
+                    <div class="nowplayingbar"><hr><h3>{{ modelType }}</h3><hr></div>
                         <div class="movieListing">
                             {% for movie in movies %}
                             <p><a href="http://127.0.0.1:8000/movies/{{ movie.title }}">
-                            <img id="poster" src="{{movie.poster}}" alt="how to train your dragon movie poster">
+                            <img id="poster" src="{{movie.poster}}" alt="{{ movie.title }}movie poster">
                             </a></p>
                             <p> {{ movie.title }} </p>
                             {% endfor %}

@@ -19,3 +19,29 @@
     margin-top: 5%;
     height: auto;
 }
+
+#buyticketsbtn {
+    width: 250px;
+    background-color: YELLOW;
+    border: none;
+    color: black;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px 4px 4px 4px;
+}
+
+.movieDetail {
+    margin-bottom: 40%;
+}
+
+#buyticketsbtn:hover {
+    -webkit-transition: background-color .4s ease;
+    -webkit-border-radius: 4px 4px 4px 4px;
+    border-radius: 4px 4px 4px 4px;
+    background-color: #60c0f4;
+}

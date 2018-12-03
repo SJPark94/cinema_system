@@ -8,12 +8,12 @@
 </head>
 <body>
 <div class="container">
-<h1>An email was sent to {{ user.email.value }} containing an activation code!</h1>
+<h1>An email was sent to {{ user.email }} containing an activation code!</h1>
 <p>Please check your inbox for your activation code and copy it here.</p>
-<form method='POST'>
+<form method='POST'><div class="confirm">
 {% csrf_token %}<br>
 <input name='code'><br><br><br><br>
-<button type="submit" id="loginbtn">Login</button><br>
+<button type="submit" id="loginbtn">Login</button><br></div>
 </form>
 </div>
 </body>

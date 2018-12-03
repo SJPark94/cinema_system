@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
-from .forms import UserRegister, EditProfileForm
+from .forms import UserRegister, EditProfileForm, EditPaymentInfo
 from django.contrib.auth.forms import PasswordChangeForm
 from django.core.mail import send_mail
 from django.contrib.auth import update_session_auth_hash
 import string, random
 from .models import UserInfo
 from movies.models import MovieInfo
+
 # Create your views here.
 
 
@@ -27,12 +28,22 @@ def registerRequest(request):
             code = codeGenerator(email)
             sendEmail(request, email, firstname, lastname, code)
             request.session['email'] = email
-            print(request.session['email'])
-            #return render(request, 'registration/register_email_sent.html', {'user': user})
+            if user.getPromo():
+                sendPromo(request, email, firstname, lastname)
             return redirect('http://127.0.0.1:8000/accounts/activation/')
     else:
         user = UserRegister()
     return render(request, 'registration/register.html', {'register': user})
+
+def sendPromo(request, email, firstname, lastname):
+    print('GOT IN SENDPROMO FUNCTION')
+    user = UserRegister(request.POST)
+    subject = 'First Purchase Promotion Code!'
+    body = 'Thank you, ' + firstname + ' ' + lastname + ". We appreciate you joining our mailing list!. \nPlease use this code PurchaseOne to get 10% off your first purchase!!"
+    botEmail = 'sunnybot94@gmail.com'
+    send_mail(subject, body, botEmail, [email], fail_silently=False)
+    print('SHOULD HAVE SENT PROMO CODE EMAIL')
+    return True
 
 def sendEmail(request, email, firstname, lastname, code):
     user = UserRegister(request.POST)
@@ -50,10 +61,10 @@ def codeGenerator(email):
     return code
 
 def activateAccount(request):
+    email = request.session['email']
+    user = UserInfo.objects.get(email=email)
+    code = request.POST.get('code')
     if request.method == 'POST':
-        email = request.session['email']
-        user = UserInfo.objects.get(email=email)
-        code = request.POST.get('code')
         if(user.activation_code == code):
 
             user.email_confirmed = True
@@ -62,7 +73,7 @@ def activateAccount(request):
             return render(request, 'registration/account_activation_confirmed.html')
         else:
             return render(request, 'registration/register_email_sent.html')
-    return render(request, 'registration/register_email_sent.html')
+    return render(request, 'registration/register_email_sent.html', {'user': user})
 
 def viewProfile(request):
     user = request.user
@@ -79,6 +90,16 @@ def editProfile(request):
         form = EditProfileForm(instance=request.user)
         return render(request, 'profile/edit_profile.html', {'form': form})
 
+def editPayment(request):
+    if request.method == 'POST':
+        form = EditPaymentInfo(request.POST, instance=request.user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/accounts/viewProfile/')
+    else:
+        form = EditPaymentInfo(instance=request.user)
+        return render(request, 'profile/edit_profile.html', {'form': form})
 
 def changePassword(request):
     if request.method == 'POST':

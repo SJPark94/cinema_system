@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import UserInfo
+from paymentSystem.models import PaymentInfo
 
 STATES = (('', '----'), ('AL', 'AL'), ('AK', 'AK'), ('AZ', 'AZ'), ('AR', 'AR'))
 
@@ -37,6 +38,9 @@ class UserRegister(UserCreationForm):
 
         raise forms.ValidationError('This email address is already in use.')
 
+    def getPromo(self):
+        return self.cleaned_data.get('sendPromo')
+
     def getFirstName(self):
         return self.cleaned_data.get('first_name')
 
@@ -57,3 +61,8 @@ class EditProfileForm(UserChangeForm):
         model = UserInfo
         fields = ['first_name', 'last_name', 'email', 'street_address',
                   'city', 'state', 'zipcode', 'sendPromo']
+
+class EditPaymentInfo(forms.ModelForm):
+    class Meta:
+        model = PaymentInfo
+        fields = ['cardNumber', 'cardMonth', 'cardYear', 'cardPin', 'cardFirstName', 'cardLastName']
