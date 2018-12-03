@@ -2,8 +2,6 @@ from django.db import models
 from uuid import uuid4
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils import timezone
-# Create your models here.
-
 
 STATES = (('', '---'), ('AL', 'AL'), ('AK', 'AK'), ('AZ', 'AZ'), ('AR', 'AR'))
 
