@@ -58,3 +58,10 @@ def activateAccount(request):
 def viewProfile(request):
     user = request.user
     return render(request, 'profile/view_profile.html', {'user': user})
+
+def get_queryset(self):
+        query = self.request.GET.get('q')
+        if query:
+            return Movie.objects.filter(title__icontains=query)
+        else:
+            return Movie.objects.all()

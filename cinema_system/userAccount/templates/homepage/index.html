@@ -26,8 +26,8 @@
                     </li>
                     <div class="searchBox">
                         <li style="margin-top: 30px">
-                            <form method="POST">
-                                <input type="text" class="textbox" placeholder="Search Movies">
+                            <form method="GET">
+                                <input class="textbox" type="text" id="searchbox" name="q" value="{{ request.GET.q }}" placeholder="Search Movies"/>
                                 <input title="Search Movies" value="&#x1F50D;" type="submit" class="button">
                             </form>
                          </li>
