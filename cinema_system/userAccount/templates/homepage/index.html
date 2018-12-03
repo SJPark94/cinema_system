@@ -3,6 +3,7 @@
 <head>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'login/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'movie_css/movie_page.css' %}">
     <meta charset='UTF-8'>
     <title>TixPix Movies</title>
     <link rel="icon" href="{% static 'pictures/cinema_logo.png' %}" alt="main logo" id="cinemalogo">
@@ -37,13 +38,23 @@
                     {% csrf_token %}
                     <!--<li style="margin-top: 15px; padding-right: 10px; float: right;"><a href="{% url 'logout' %}">Log Out</a></li>-->
                     <li style="margin-top: 15px; padding-right: 15px; float: right;">
+                        {% if user.is_superuser %}
                         <div class="dropdown">
-                            <button class="dropbtn"><a>{{ user.first_name }} {{ user.last_name }}</a> &darr;</button>
+                            <button class="dropbtn"><a>{{ user.first_name }} {{ user.last_name }}</a></button>
                             <div class="dropdown-content">
-                                <a href="http://127.0.0.1:8000/accounts/viewProfile">Profile</a>
+                                <a href="http://127.0.0.1:8000/admin">Admin Portal</a>
                                 <a href="{% url 'logout' %}">Log Out</a>
                             </div>
                         </div>
+                        {% else %}
+                        <div class="dropdown">
+                            <button class="dropbtn"><a>{{ user.first_name }} {{ user.last_name }}</a>   </button>
+                            <div class="dropdown-content">
+                                <a href="http://127.0.0.1:8000/accounts/viewProfile/">Profile</a>
+                                <a href="{% url 'logout' %}">Log Out</a>
+                            </div>
+                        </div>
+                        {% endif %}
                     </li>
                     {% else %}
                     {% csrf_token %}
@@ -53,16 +64,18 @@
                     {% endblock %}
                 </ul>
             </div>
-                {% if user.is_superuser %}
-                    <div class="smallcontainer">
-                        <p>ADMIN PAGE WILL BE HERE</p>
-                    </div>
-                {% else %}
-                    <div class="smallcontainer">
-                        <p>This page will be filled with movies!</p>
-                    </div>
-                 {% endif %}
 
+                    <div class="smallcontainer">
+                    <div class="nowplayingbar"><hr><h3>Now Playing:</h3><hr></div>
+                        <div class="movieListing">
+                            {% for movie in movies %}
+                            <p><a href="http://127.0.0.1:8000/movies/{{ movie.title }}">
+                            <img id="poster" src="{{movie.poster}}" alt="how to train your dragon movie poster">
+                            </a></p>
+                            <p> {{ movie.title }} </p>
+                            {% endfor %}
+                        </div>
+                    </div>
         </div>
     </body>
     <div class='footer'>
