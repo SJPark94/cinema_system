@@ -1,16 +1,15 @@
-{% load static %}
+{% load staticfiles %}
 <html>
 <head>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'login/style.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'movie_css/movie_page.css' %}">
+    <meta charset='UTF-8'>
     <link rel="icon" href="{% static 'pictures/cinema_logo.png' %}">
 
-    <meta charset='UTF-8'>
-    <title>Search Results :D</title>
+    <title>Checkout</title>
 </head>
-    <body>
-        <div class="container">
+<header>
+<div class="container">
             <div id="topBar">
                 <ul>
                     <li><a href="http://127.0.0.1:8000/">
@@ -21,15 +20,15 @@
                         <div class="dropdown">
                             <button class="dropbtn">Movies &darr;</button>
                             <div class="dropdown-content">
-                                <a href="http://127.0.0.1:8000/movies/sort/Now Playing">Now Playing</a>
-                                <a href="http://127.0.0.1:8000/movies/sort/Coming Soon">Coming Soon</a>
+                                <a href="http://127.0.0.1:8000/">Now Playing</a>
+                                <a href="http://127.0.0.1:8000/">Coming Soon</a>
                             </div>
                         </div>
                     </li>
                     <div class="searchBox">
                         <li style="margin-top: 30px">
                             <form method="POST" action="/movies/searchresult/">
-                            {% csrf_token %}
+                                {% csrf_token %}
                                 <input type="text" class="textbox" name="search" placeholder="Search Movies">
                                 <input title="Search Movies" value="&#x1F50D;" type="submit" class="button">
                             </form>
@@ -65,19 +64,40 @@
                     {% endif %}
                     {% endblock %}
                 </ul>
-            </div>
-
-                    <div class="smallcontainer">
-                    <div class="nowplayingbar"><hr><h3>Search Results:</h3><hr></div>
-                        <p>No search results!</p>
-                    </div>
+                </div></div>
+</header>
+<body>
+<div class="container">
+    <div class="checkoutContainer">
+        <p id="orderSummary">Order Summary:</p><hr>
+        <div class="orderSummary">
+        <div class="ticketList">
+            <ol>
+                <p>{{ adult }} Adult Tickets</p>
+                <p>{{ child }} Child Tickets</p>
+                <p>{{ senior }} Senior Tickets</p>
+            </ol>
         </div>
-    </body>
-    <footer>
-    <div class='footer'>
-    <p>Group 9A</p>
-    <p>TixPix E-Cinema Booking System</p>
-    <p>University of Georgia FALL 2018 CSCI4050 Software Engineering</p>
-</div>
-</footer>
+        <div  class="priceList">
+             <ol>
+                 <p>${{ adultTotal }}.00</p>
+                 <p>${{ childTotal }}.00</p>
+                 <p>${{ seniorTotal }}.00</p>
+                 <hr>
+                 <p>Ticket Total: ${{ totalTickets }}.00</p>
+                 <p>Sales Tax: ${{ salesTax }}0</p><hr>
+                 <p>Total: ${{ totalCost }}0</p>
+             </ol>
+        </div>
+        </div>
+        <div class="paymentForm"><p>Payment Information: </p>{{ paymentForm.as_p }}</div>
+        <div class="checkoutBtns">
+        <form action="http://127.0.0.1:8000/movies/book/{{title}}/{{date}}/{{time}}/{{adult}}/{{child}}/{{senior}}/checkout/confirmation/{{totalCost}}">
+            <input type="submit" value="Checkout" id="checkoutCart">
+        </form></div>
+    </div>
+
+    </div>
+
+</body>
 </html>

@@ -6,15 +6,13 @@ from django.contrib.auth import update_session_auth_hash
 import string, random
 from .models import UserInfo
 from movies.models import MovieInfo
+from paymentSystem.models import Order
 
 # Create your views here.
 
 
 def homepage(request):
     movieObject = MovieInfo.objects.all()
-    for e in MovieInfo.objects.all():
-        print(e.title)
-    print('there is some movieObject')
     return render(request, 'homepage/index.html', {'movies': movieObject})
 
 def registerRequest(request):
@@ -36,14 +34,10 @@ def registerRequest(request):
     return render(request, 'registration/register.html', {'register': user})
 
 def sendPromo(request, email, firstname, lastname):
-    print('GOT IN SENDPROMO FUNCTION')
-    user = UserRegister(request.POST)
     subject = 'First Purchase Promotion Code!'
     body = 'Thank you, ' + firstname + ' ' + lastname + ". We appreciate you joining our mailing list!. \nPlease use this code PurchaseOne to get 10% off your first purchase!!"
     botEmail = 'sunnybot94@gmail.com'
     send_mail(subject, body, botEmail, [email], fail_silently=False)
-    print('SHOULD HAVE SENT PROMO CODE EMAIL')
-    return True
 
 def sendEmail(request, email, firstname, lastname, code):
     user = UserRegister(request.POST)
@@ -112,3 +106,9 @@ def changePassword(request):
     else:
         form = PasswordChangeForm(user=request.user)
         return render(request, 'profile/change_password.html', {'form': form})
+
+def orderHistory(request):
+    user = UserInfo(request.POST)
+    orderHistory = Order(user)
+    print(orderHistory)
+    return render(request, 'profile/order_history.html')

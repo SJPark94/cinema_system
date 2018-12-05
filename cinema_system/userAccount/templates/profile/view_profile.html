@@ -4,7 +4,9 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'login/style.css' %}">
     <meta charset='UTF-8'>
-    <title>Moovies :D</title>
+        <link rel="icon" href="{% static 'pictures/cinema_logo.png' %}">
+
+    <title>View Profile :D</title>
 </head>
     <body>
         <div class="container">
@@ -63,6 +65,7 @@
                             <p>Send Promo: {{ user.sendPromo }}</p>
                             <form action="http://127.0.0.1:8000/accounts/editProfile/"><input id="loginbtn" type="submit" value="Edit Profile"></form>
                             <form action="http://127.0.0.1:8000/accounts/editPayment/"><input id="loginbtn" type="submit" value="Edit Payment Info"></form>
+                            <form action="http://127.0.0.1:8000/accounts/orderHistory/"><input id="loginbtn" type="submit" value="View Order History"></form>
 
 
 
